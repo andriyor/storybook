@@ -6,10 +6,26 @@ import { convert as flowConvert } from './flow';
 import { convert as propTypesConvert } from './proptypes';
 
 export const convert = (docgenInfo: DocgenInfo) => {
+  console.log('convert');
   const { type, tsType, flowType } = docgenInfo;
-  if (type != null) return propTypesConvert(type);
-  if (tsType != null) return tsConvert(tsType as TSType);
-  if (flowType != null) return flowConvert(flowType as FlowType);
+  if (type != null) {
+    console.log('type');
+    const converted = propTypesConvert(type);
+    console.log(converted);
+    return converted;
+  }
+  if (tsType != null) {
+    console.log('tsType');
+    const converted = tsConvert(tsType as TSType);
+    console.log(converted);
+    return converted;
+  }
+  if (flowType != null) {
+    console.log('flowType');
+    const converted = flowConvert(flowType as FlowType);
+    console.log(converted);
+    return converted;
+  }
 
   return null;
 };

@@ -3,6 +3,7 @@ import { hasDocsOrControls } from '@storybook/docs-tools';
 import type { StorybookConfig } from './types';
 
 export const babel: StorybookConfig['babel'] = async (config, options) => {
+  console.log('babel');
   if (!hasDocsOrControls(options)) return config;
 
   const typescriptOptions = await options.presets.apply<StorybookConfig['typescript']>(
@@ -10,13 +11,13 @@ export const babel: StorybookConfig['babel'] = async (config, options) => {
     {} as any
   );
 
-  const { reactDocgen } = typescriptOptions || {};
+  const {reactDocgen} = typescriptOptions || {};
 
   if (typeof reactDocgen !== 'string') {
     return config;
   }
 
-  return {
+  const newConfig = {
     ...config,
     overrides: [
       ...(config?.overrides || []),
@@ -26,9 +27,16 @@ export const babel: StorybookConfig['babel'] = async (config, options) => {
       },
     ],
   };
-};
+
+  console.log('newConfig');
+  console.log(newConfig);
+  console.log(JSON.stringify(newConfig, null, 4));
+
+  return newConfig;
+}
 
 export const webpackFinal: StorybookConfig['webpackFinal'] = async (config, options) => {
+  console.log('webpackFinal');
   if (!hasDocsOrControls(options)) return config;
 
   const typescriptOptions = await options.presets.apply<StorybookConfig['typescript']>(
