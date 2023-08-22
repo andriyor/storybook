@@ -12,6 +12,10 @@ export function isValidDocgenSection(docgenSection: any) {
 }
 
 export function getDocgenSection(component: Component, section: string): any {
+  console.log('component');
+  console.log(component);
+  console.log('component.__docgenInfo');
+  console.log(component.__docgenInfo);
   return hasDocgen(component) ? component.__docgenInfo[section] : null;
 }
 

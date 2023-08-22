@@ -53,8 +53,13 @@ export const extractComponentSectionArray = (docgenSection: any) => {
 };
 
 export const extractComponentSectionObject = (docgenSection: any) => {
+  console.log('docgenSection');
+  console.log(docgenSection);
   const docgenPropsKeys = Object.keys(docgenSection);
-  const typeSystem = getTypeSystem(docgenSection[docgenPropsKeys[0]]);
+  console.log('docgenPropsKeys');
+  console.log(docgenPropsKeys);
+  // const typeSystem = getTypeSystem(docgenSection[docgenPropsKeys[0]]);
+  const typeSystem = TypeSystem.TYPESCRIPT;
   const createPropDef = getPropDefFactory(typeSystem);
 
   return docgenPropsKeys
@@ -69,6 +74,7 @@ export const extractComponentSectionObject = (docgenSection: any) => {
 };
 
 export const extractComponentProps: ExtractProps = (component, section) => {
+  console.log('extractComponentProps');
   const docgenSection = getDocgenSection(component, section);
 
   if (!isValidDocgenSection(docgenSection)) {
